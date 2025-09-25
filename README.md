@@ -57,7 +57,7 @@ sudo pacman -S glfw glm mesa
    cd PhySim
    ```
 
-2. **Build the project:**
+2. **Build and Run:**
    
    **Option A: One-shot build script (Recommended)**
    ```bash
