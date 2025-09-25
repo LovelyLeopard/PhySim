@@ -17,11 +17,16 @@ fi
 
 echo "[PhySim] Starting build and setup..."
 
+# Set environment variable to communicate execution context to child scripts
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    export PHYSIM_EXECUTION_MODE="executed"
+else
+    export PHYSIM_EXECUTION_MODE="sourced"
+fi
+
 source scripts/setupBuild.bash
 source scripts/setupRun.bash
 source scripts/buildAndInstall.bash
 
 # Add current bin directory to PATH since we're now in app directory
 export PATH="$PWD/bin:$PATH"
-
-echo "[PhySim] Ready to run! Execute: physim"
