@@ -1,37 +1,37 @@
 cmake_minimum_required(VERSION 3.10)
-project(physim)
+project(physim VERSION 1.0.0 LANGUAGES CXX)
 
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Output binary to app/bin
+# Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../app/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../app/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../app/lib)
 
-# Find OpenGL
+# Global package finding - shared across all subdirectories
 find_package(OpenGL REQUIRED)
-
-# GLFW
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
-
-# GLM
 find_package(glm REQUIRED)
 
+# Global include directories
 include_directories(
+    ${CMAKE_SOURCE_DIR}/include
     ${OPENGL_INCLUDE_DIR}
     ${GLFW_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS}
-    include
 )
 
+# Global link directories
 link_directories(${GLFW_LIBRARY_DIRS})
 
-add_executable(physim src/main.cpp)
+# Add subdirectories
+add_subdirectory(src)
 
-target_link_libraries(physim
-    ${OPENGL_gl_LIBRARY}
-    ${GLFW_LIBRARIES}
-    ${CMAKE_DL_LIBS}
-)
-
-# Install target
-install(TARGETS physim DESTINATION ../app/bin)
+# Future subdirectories
+# add_subdirectory(lib)      # For physics engine library
+# add_subdirectory(tests)    # For unit tests
+# add_subdirectory(examples) # For example simulations

@@ -57,43 +57,51 @@ sudo pacman -S glfw glm mesa
    cd PhySim
    ```
 
-2. **Build the project:**
+2. **Build and Run:**
    
    **Option A: One-shot build script (Recommended)**
    ```bash
    ./scripts/physim.bash
-   ./app/bin/physim
+   # This will build and return to original directory
+   physim
    ```
-   
-   **Option B: Using project aliases**
+   or
    ```bash
-   source scripts/alias.txt
-   physim-build
-   physim-run
+   source scripts/physim.bash
+   # This will build and stay in app directory
+   physim
    ```
    
-   **Option C: Manual build process**
+   **Option B: Manual build process**
+   ```bash
+   ./scripts/setupBuild.bash
+   ./scripts/setupRun.bash
+   ./scripts/buildAndInstall.bash
+   # Will build and return to original directory
+   physim
+   ```
+   or
    ```bash
    source scripts/setupBuild.bash
    source scripts/setupRun.bash
-   mkdir -p build && cd build
-   cmake .. -DCMAKE_INSTALL_PREFIX=../app
-   make -j$(nproc) install
-   cd ../app
-   ./bin/physim
+   source scripts/buildAndInstall.bash
+   # Will build and stay in app directory
+   physim
    ```
 
-### Available Commands (After sourcing aliases)
+### Available Scripts
+
+The project provides several build scripts for different workflows:
 
 ```bash
-# Build the entire project
-physim-build
+# Main build script (works both ways):
+./scripts/physim.bash          # Execute: builds and returns to original directory
+source scripts/physim.bash     # Source: builds and stays in app directory
 
-# Run the simulation
-physim-run
-
-# Clean build artifacts
-physim-clean
+# Individual scripts for manual workflow:
+sscripts/setupBuild.bash    # Configure build environment
+scripts/setupRun.bash      # Set up runtime environment  
+scripts/buildAndInstall.bash # Build and install the project
 ```
 
 ## 🏗️ Project Structure
@@ -101,18 +109,21 @@ physim-clean
 ```
 PhySim/
 ├── src/                    # Source code
+│   ├── CMakeLists.txt     # Executable build configuration
 │   └── main.cpp           # Main application entry point
+├── lib/                    # Physics engine library (future)
+│   └── CMakeLists.txt     # Library build configuration
 ├── include/               # Header files (future physics engine components)
 ├── scripts/               # Build and development scripts
-│   ├── physim.bash       # Main build script
+│   ├── physim.bash       # Smart main build script (execute or source)
 │   ├── setupBuild.bash   # Build environment setup
 │   ├── setupRun.bash     # Runtime environment setup
-│   ├── buildAndInstall.bash # Build and install process
-│   └── alias.txt         # Project-specific aliases
+│   └── buildAndInstall.bash # Build and install process
 ├── build/                 # Build directory (generated)
 ├── app/                   # Installation directory (generated)
-│   └── bin/physim        # Compiled executable
-├── CMakeLists.txt         # CMake configuration
+│   ├── bin/physim        # Compiled executable
+│   └── lib/              # Future libraries
+├── CMakeLists.txt         # Main project configuration (modular)
 └── README.md             # This file
 ```
 
@@ -130,9 +141,12 @@ PhySim/
 4. Submit a Pull Request to `develop`
 
 ### Build System
-The project uses CMake with custom scripts for development convenience:
-- **Work-safe**: Scripts don't modify your global shell environment
-- **Flexible**: Multiple build options for different workflows
+The project uses a modular CMake architecture with custom scripts for development convenience:
+- **Modular CMake**: Separate CMakeLists.txt for different components (main project, executable, libraries)
+- **Smart Scripts**: `physim.bash` detects if executed or sourced and behaves accordingly
+- **Work-safe**: Scripts don't modify your global shell environment  
+- **Flexible**: Multiple build workflows for different development styles
+- **Scalable**: Easy to add new subdirectories and components
 - **Portable**: Works across different Linux distributions
 
 ## 🎮 Current Features
@@ -164,9 +178,15 @@ The project uses CMake with custom scripts for development convenience:
 
 ### Dependencies
 - **OpenGL** - Graphics rendering
-- **GLFW** - Window management and input handling
+- **GLFW** - Window management and input handling  
 - **GLM** - Mathematics library for graphics
-- **CMake** - Build system
+- **CMake** - Modular build system (3.10+)
+
+### Build Architecture
+- **Modular CMake**: Each component has its own CMakeLists.txt
+- **Main Project**: Global configuration and dependency management
+- **Executable**: Defined in `src/CMakeLists.txt`
+- **Future Library**: Ready-to-use structure in `lib/CMakeLists.txt`
 
 ### Platform Support
 - Linux (Primary development platform)
