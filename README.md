@@ -63,25 +63,30 @@ sudo pacman -S glfw glm mesa
    ```bash
    ./scripts/physim.bash
    # This will build and return to original directory
-   ./app/bin/physim
+   physim
    ```
-   
-   **Option B: Source the build script (stays in app directory)**
+   or
    ```bash
    source scripts/physim.bash
-   # You'll be in the app directory, ready to run:
-   physim  # (executable available from anywhere via PATH)
-   # or
-   ./bin/physim
+   # This will build and stay in app directory
+   physim
    ```
    
-   **Option C: Manual build process**
+   **Option B: Manual build process**
+   ```bash
+   ./scripts/setupBuild.bash
+   ./scripts/setupRun.bash
+   ./scripts/buildAndInstall.bash
+   # Will build and return to original directory
+   physim
+   ```
+   or
    ```bash
    source scripts/setupBuild.bash
    source scripts/setupRun.bash
    source scripts/buildAndInstall.bash
-   # Will end up in app directory
-   ./bin/physim
+   # Will build and stay in app directory
+   physim
    ```
 
 ### Available Scripts
@@ -94,9 +99,9 @@ The project provides several build scripts for different workflows:
 source scripts/physim.bash     # Source: builds and stays in app directory
 
 # Individual scripts for manual workflow:
-source scripts/setupBuild.bash    # Configure build environment
-source scripts/setupRun.bash      # Set up runtime environment  
-source scripts/buildAndInstall.bash # Build and install the project
+sscripts/setupBuild.bash    # Configure build environment
+scripts/setupRun.bash      # Set up runtime environment  
+scripts/buildAndInstall.bash # Build and install the project
 ```
 
 ## 🏗️ Project Structure
