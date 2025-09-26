@@ -63,7 +63,7 @@ sudo pacman -S glfw glm mesa
    ```bash
    ./scripts/physim.bash
    # This will build and return to original directory
-   physim
+   ./app/bin/physim
    ```
    or
    ```bash
@@ -78,7 +78,7 @@ sudo pacman -S glfw glm mesa
    ./scripts/setupRun.bash
    ./scripts/buildAndInstall.bash
    # Will build and return to original directory
-   physim
+   ./app/bin/physim
    ```
    or
    ```bash
