@@ -8,7 +8,7 @@ cd ../app
 if [[ "$PHYSIM_EXECUTION_MODE" == "executed" || "${BASH_SOURCE[0]}" == "${0}" ]]; then
     # Either physim.bash was executed OR this script is being executed directly
     echo "[buildAndInstall] Build complete."
-    echo "[PhySim] Ready to run! Execute: physim"
+    echo "[PhySim] Ready to run! Execute: ./app/bin/physim"
 else
     # Either physim.bash was sourced OR this script is being sourced directly
     echo "[buildAndInstall] Build complete. You are in app directory."
