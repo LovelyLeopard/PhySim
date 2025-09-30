@@ -1,6 +1,7 @@
 # Source files for the main PhySim executable
 set(PHYSIM_SOURCES
     main.cpp
+    glad.c  # GLAD OpenGL loader
     # Future source files will be added here:
     # physics/pendulum.cpp
     # physics/projectile.cpp
@@ -16,6 +17,7 @@ target_link_libraries(physim
     ${OPENGL_gl_LIBRARY}
     ${GLFW_LIBRARIES}
     ${CMAKE_DL_LIBS}
+    glog::glog
 )
 
 # Set properties for the executable

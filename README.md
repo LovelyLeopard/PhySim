@@ -34,19 +34,19 @@ Before building PhySim, ensure you have the following dependencies installed:
 ```bash
 sudo apt update
 sudo apt install build-essential cmake pkg-config
-sudo apt install libglfw3-dev libglm-dev libgl1-mesa-dev
+sudo apt install libglfw3-dev libglm-dev libgl1-mesa-dev libgoogle-glog-dev
 ```
 
 #### Fedora/RHEL:
 ```bash
 sudo dnf install gcc-c++ cmake pkgconfig
-sudo dnf install glfw-devel glm-devel mesa-libGL-devel
+sudo dnf install glfw-devel glm-devel mesa-libGL-devel glog-devel
 ```
 
 #### Arch Linux:
 ```bash
 sudo pacman -S base-devel cmake pkgconfig
-sudo pacman -S glfw glm mesa
+sudo pacman -S glfw glm mesa glog
 ```
 
 ### Clone and Build
@@ -180,6 +180,7 @@ The project uses a modular CMake architecture with custom scripts for developmen
 - **OpenGL** - Graphics rendering
 - **GLFW** - Window management and input handling  
 - **GLM** - Mathematics library for graphics
+- **glog** - Google's C++ logging library
 - **CMake** - Modular build system (3.10+)
 
 ### Build Architecture

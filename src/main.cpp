@@ -1,21 +1,24 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <glog/logging.h>
 
 int main() {
+    // Initialize Google Logging
+    google::InitGoogleLogging("physim");
+    
     // GLFW INIT
     if(!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
+        LOG(ERROR) << "Failed to initialize GLFW";
         return -1;
     }
 
     // CREATE WINDOW
     GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", nullptr, nullptr);
     if(!window) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
+        LOG(ERROR) << "Failed to create GLFW window";
         glfwTerminate();
         return -1;
     }
-
     glfwMakeContextCurrent(window);
 
     while(!glfwWindowShouldClose(window)) {
