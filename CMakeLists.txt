@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(physim VERSION 1.0.0 LANGUAGES CXX)
+project(physim VERSION 1.0.0 LANGUAGES CXX C)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -16,6 +16,7 @@ find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 find_package(glm REQUIRED)
+find_package(glog REQUIRED)
 
 # Global include directories
 include_directories(
@@ -23,6 +24,7 @@ include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${GLFW_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS}
+    ${glog_INCLUDE_DIRS}
 )
 
 # Global link directories
@@ -30,8 +32,7 @@ link_directories(${GLFW_LIBRARY_DIRS})
 
 # Add subdirectories
 add_subdirectory(src)
-
+add_subdirectory(examples)
 # Future subdirectories
 # add_subdirectory(lib)      # For physics engine library
 # add_subdirectory(tests)    # For unit tests
-# add_subdirectory(examples) # For example simulations
